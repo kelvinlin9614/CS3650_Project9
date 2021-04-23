@@ -1,0 +1,87 @@
+/** Implements a graphical square. */
+class Enemy {
+   field int xE, yE;
+   field int size;
+
+   /** Constructs a new square with a given location and size. */
+   constructor Enemy new(int Ax, int Ay, int Asize) {
+      let xE = Ax;
+      let yE = Ay;
+      let size = Asize;
+      do draw();
+      return this;
+   }
+
+   /** Disposes this square. */
+   method void dispose() {
+      do Memory.deAlloc(this);
+      return;
+   }
+
+   /** Draws the square on the screen. */
+   method void draw() {
+      do Screen.setColor(true);
+      do Screen.drawRectangle(xE, yE, xE + size, yE + size);
+      return;
+   }
+
+   method void redrawRight() {
+      do Screen.setColor(false);
+      do Screen.drawRectangle(xE, yE, xE + size, yE + size);
+      let xE = xE + 10;
+      if ((xE + size) < 510) {
+        do Screen.setColor(true);
+        do Screen.drawRectangle(xE, yE, xE + size, yE + size);
+      }
+      else {
+        do Screen.setColor(false);
+        do Screen.drawRectangle(xE, yE, xE + size, yE + size);
+        let xE = size;
+        do Screen.setColor(true);
+        do Screen.drawRectangle(xE, yE, xE + size, yE + size);
+      }
+
+      return;
+   }
+   method void redrawLeft() {
+      do Screen.setColor(false);
+      do Screen.drawRectangle(xE, yE, xE + size, yE + size);
+      let xE = xE - 10;
+      do Screen.setColor(true);
+      do Screen.drawRectangle(xE, yE, xE + size, yE + size);
+      return;
+   }
+   method void redrawUp() {
+      do Screen.setColor(false);
+      do Screen.drawRectangle(xE, yE, xE + size, yE + size);
+      let yE = yE - 10;
+      do Screen.setColor(true);
+      do Screen.drawRectangle(xE, yE, xE + size, yE + size);
+      return;
+   }
+   method void redrawDown() {
+      do Screen.setColor(false);
+      do Screen.drawRectangle(xE, yE, xE + size, yE + size);
+      let yE = yE + 10;
+      do Screen.setColor(true);
+      do Screen.drawRectangle(xE, yE, xE + size, yE + size);
+      return;
+   }
+
+   method int get_xE(){
+      return xE;
+   }
+
+   method int get_yE(){
+      return yE;
+   }
+
+   /** Erases the square from the screen. */
+   method void erase() {
+      do Screen.setColor(false);
+      do Screen.drawRectangle(xE, yE, xE + size, yE + size);
+      return;
+   }
+
+
+}
